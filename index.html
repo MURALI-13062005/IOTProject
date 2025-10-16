@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Shelter Capacity Monitor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-people-arrows"></i> Smart Shelter Capacity Monitor</h1>
+                <div class="status-indicator">
+                    <span class="status-dot online"></span>
+                    <span>System Online</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <!-- Capacity Overview -->
+            <section class="capacity-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-users"></i> Shelter Capacity</h2>
+                    <span class="last-update">Updated: <span id="update-time">Just now</span></span>
+                </div>
+                <div class="capacity-display">
+                    <div class="capacity-circle">
+                        <div class="circle-progress">
+                            <svg width="200" height="200">
+                                <circle class="progress-bg" cx="100" cy="100" r="90"></circle>
+                                <circle class="progress-bar" cx="100" cy="100" r="90" id="capacity-progress"></circle>
+                            </svg>
+                            <div class="capacity-text">
+                                <span class="current-count" id="current-count">0</span>
+                                <span class="max-count">/ 50</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="capacity-stats">
+                        <div class="stat-item available">
+                            <i class="fas fa-bed"></i>
+                            <div>
+                                <span class="stat-value" id="available-beds">50</span>
+                                <span class="stat-label">Available Beds</span>
+                            </div>
+                        </div>
+                        <div class="stat-item occupied">
+                            <i class="fas fa-user-check"></i>
+                            <div>
+                                <span class="stat-value" id="occupied-beds">0</span>
+                                <span class="stat-label">Occupied Beds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sensor Status -->
+            <section class="sensors-card">
+                <h2><i class="fas fa-satellite-dish"></i> Sensor Status</h2>
+                <div class="sensors-grid">
+                    <div class="sensor-item">
+                        <div class="sensor-icon ir-sensor">
+                            <i class="fas fa-wave-square"></i>
+                        </div>
+                        <span class="sensor-name">IR Sensor</span>
+                        <span class="sensor-status active">Active</span>
+                    </div>
+                    <div class="sensor-item">
+                        <div class="sensor-icon ultrasonic">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <span class="sensor-name">Ultrasonic</span>
+                        <span class="sensor-status active">Active</span>
+                    </div>
+                    <div class="sensor-item">
+                        <div class="sensor-icon wifi">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <span class="sensor-name">Wi-Fi Module</span>
+                        <span class="sensor-status active">Connected</span>
+                    </div>
+                    <div class="sensor-item">
+                        <div class="sensor-icon gsm">
+                            <i class="fas fa-sim-card"></i>
+                        </div>
+                        <span class="sensor-name">GSM Module</span>
+                        <span class="sensor-status standby">Standby</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alerts Panel -->
+            <section class="alerts-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-bell"></i> Alert System</h2>
+                    <div class="alert-mode">
+                        <span class="mode-indicator normal" id="alert-mode">Normal</span>
+                    </div>
+                </div>
+                <div class="alerts-content">
+                    <div class="alert-item" id="capacity-alert">
+                        <div class="alert-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="alert-info">
+                            <span class="alert-title">Capacity Status</span>
+                            <span class="alert-message" id="capacity-message">Within safe limits</span>
+                        </div>
+                    </div>
+                    <div class="alert-item" id="buzzer-status">
+                        <div class="alert-icon">
+                            <i class="fas fa-volume-up"></i>
+                        </div>
+                        <div class="alert-info">
+                            <span class="alert-title">Buzzer System</span>
+                            <span class="alert-message">Ready - Standby Mode</span>
+                        </div>
+                    </div>
+                    <div class="alert-actions">
+                        <button class="btn btn-primary" id="test-alert">
+                            <i class="fas fa-bell"></i> Test Alert
+                        </button>
+                        <button class="btn btn-secondary" id="silence-alert">
+                            <i class="fas fa-volume-mute"></i> Silence
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Real-time Data -->
+            <section class="data-card">
+                <h2><i class="fas fa-chart-line"></i> Real-time Monitoring</h2>
+                <div class="data-grid">
+                    <div class="data-item">
+                        <span class="data-label">People In</span>
+                        <span class="data-value" id="people-in">0</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">People Out</span>
+                        <span class="data-value" id="people-out">0</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Current Rate</span>
+                        <span class="data-value" id="current-rate">0/min</span>
+                    </div>
+                    <div class="data-item">
+                        <span class="data-label">Battery</span>
+                        <span class="data-value battery">87%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mobile App Preview -->
+            <section class="mobile-card">
+                <h2><i class="fas fa-mobile-alt"></i> Mobile Alerts</h2>
+                <div class="mobile-preview">
+                    <div class="phone-mockup">
+                        <div class="phone-header">
+                            <span>Shelter Alert</span>
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="phone-content">
+                            <div class="notification">
+                                <i class="fas fa-exclamation-circle urgent"></i>
+                                <div class="notification-content">
+                                    <strong>Capacity Warning</strong>
+                                    <p>Shelter at 85% capacity - 43/50 occupied</p>
+                                    <small>2 minutes ago</small>
+                                </div>
+                            </div>
+                            <div class="notification">
+                                <i class="fas fa-info-circle info"></i>
+                                <div class="notification-content">
+                                    <strong>System Update</strong>
+                                    <p>All sensors functioning normally</p>
+                                    <small>1 hour ago</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Smart Shelter Capacity Monitor v1.0 | For Emergency Displacement Scenarios</p>
+            <div class="footer-links">
+                <span>IoT Platform: ThingSpeak</span>
+                <span>Database: Firebase</span>
+                <span>Hardware: Arduino + ESP8266</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
